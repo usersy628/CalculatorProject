@@ -16,22 +16,15 @@ public class App {
 
         System.out.println("Hello, Calculator!");
 
-        int result = 0;
-        int num1;
-        int num2;
-        char symbol;
-
         Scanner sc = new Scanner(System.in);
-
 
         while (true) {
             try {
-                // 숫자인지
                 System.out.print("첫 번째 숫자를 입력하세요: ");
-                num1 = sc.nextInt();
+                int num1 = sc.nextInt();
 
                 System.out.print("사칙연산 기호를 입력하세요: ");
-                symbol = sc.next().charAt(0);
+                char symbol = sc.next().charAt(0);
 
                 // 연산 오류 방지: 기호 입력 받을 때 까지
                 while (!(symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/')) {
@@ -41,8 +34,8 @@ public class App {
 
                 System.out.print("두 번째 숫자를 입력하세요: ");
                 // 숫자인지 체크
+                int num2 = sc.nextInt();
                 try {
-                    num2 = sc.nextInt();
                     if (num2 == 0 && symbol == '/') {
                         System.out.println("※0으로 나눌 수 없습니다");
                     }
@@ -51,9 +44,11 @@ public class App {
                     num2 = sc.nextInt();
                 }
 
-                Calculator calculator = new Calculator(num1, num2, symbol);
-                result = calculator.calculator(num1, symbol, num2);
+                Calculator cal = new Calculator(num1, num2, symbol);
+                int result = cal.calculator(num1, symbol, num2);
                 System.out.println("결과: " + result); // 결과 반환
+                cal.addResult();
+                System.out.println("getResult = " + cal.getResult()); // getResult = 0
 
                 System.out.println("exit 입력 시 종료됩니다. 계속 하려면 아무거나 입력하세요.");
                 if (sc.next().equals("exit")) {
