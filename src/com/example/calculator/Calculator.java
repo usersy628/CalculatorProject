@@ -10,11 +10,31 @@ public class Calculator {
     */
 
     // 속성
-    ArrayList<Integer> result = new ArrayList<>();
+     ArrayList<Integer> result = new ArrayList<>();
     int num1;
     int num2;
     char symbol;
 
+    // 생성자
+    public Calculator(int num1, int num2, char symbol) {
+        this.num1 = num1;
+        this.num2 = num2;
+        this.symbol = symbol;
+    }
+
+    // 기능
+    public ArrayList<Integer> getResult() {
+        return result;
+    }
+    public int getNum1() {
+        return num1;
+    }
+    public int getNum2() {
+        return num2;
+    }
+    public char getSymbol() {
+        return symbol;
+    }
 
     // 양의 정수 2개와 연산기호 매개변수 - 사칙연산 수행 - 반환
     public static int calculator(int num1, char symbol, int num2) {
@@ -30,4 +50,6 @@ public class Calculator {
 
         return result;
     }
+
+    //
 }
