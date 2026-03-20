@@ -23,6 +23,7 @@ public class App {
 
         Scanner sc = new Scanner(System.in);
 
+
         while (true) {
             try {
                 // 숫자인지
@@ -50,13 +51,8 @@ public class App {
                     num2 = sc.nextInt();
                 }
 
-                // 사칙연산 케이스 지정 ( addition / subtraction / multiply / division )
-                switch (symbol) {
-                    case '+': result = num1 + num2; break;
-                    case '-': result = num1 - num2; break;
-                    case '*': result = num1 * num2; break;
-                    case '/': result = num1 / num2; break;
-                }
+                Calculator calculator = new Calculator(num1, num2, symbol);
+                result = calculator.calculator(num1, symbol, num2);
                 System.out.println("결과: " + result); // 결과 반환
 
                 System.out.println("exit 입력 시 종료됩니다. 계속 하려면 아무거나 입력하세요.");
