@@ -1,7 +1,6 @@
 package com.example.calculator;
 
 import java.util.InputMismatchException;
-import java.util.OptionalInt;
 import java.util.Scanner;
 
 public class Calculator {
@@ -41,9 +40,14 @@ public class Calculator {
 
                 System.out.print("두 번째 숫자를 입력하세요: ");
                 // 숫자인지 체크
-                num2 = sc.nextInt();
-                if (num2 == 0 && symbol == '/') {
-                    System.out.println("※0으로 나눌 수 없습니다");
+                try {
+                    num2 = sc.nextInt();
+                    if (num2 == 0 && symbol == '/') {
+                        System.out.println("※0으로 나눌 수 없습니다");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("※숫자를 입력하세요.");
+                    num2 = sc.nextInt();
                 }
 
                 // 사칙연산 케이스 지정 ( addition / subtraction / multiply / division )
@@ -69,10 +73,10 @@ public class Calculator {
                     break;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("※양의 정수(0포함)를 입력해주세요.");
+                System.out.println("※InputMismatchException" + e.getMessage());
                 sc.nextLine();
             } catch (Exception e) {
-                System.out.println("※" + e.getMessage());
+                System.out.println("※Exception" + e.getMessage());
             }
         }
     }
