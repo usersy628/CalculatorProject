@@ -15,6 +15,7 @@ public class App {
         */
 
         System.out.println("Hello, Calculator!");
+        Calculator cal = new Calculator(0, 0, '+');
 
         Scanner sc = new Scanner(System.in);
 
@@ -33,22 +34,16 @@ public class App {
                 }
 
                 System.out.print("두 번째 숫자를 입력하세요: ");
-                // 숫자인지 체크
                 int num2 = sc.nextInt();
-                try {
-                    if (num2 == 0 && symbol == '/') {
-                        System.out.println("※0으로 나눌 수 없습니다");
-                    }
-                } catch (InputMismatchException e) {
-                    System.out.println("※숫자를 입력하세요.");
-                    num2 = sc.nextInt();
-                }
 
-                Calculator cal = new Calculator(num1, num2, symbol);
+
                 int result = cal.calculator(num1, symbol, num2);
                 System.out.println("결과: " + result); // 결과 반환
-                cal.addResult();
-                System.out.println("getResult = " + cal.getResult()); // getResult = 0
+                cal.addResultList(result);
+                System.out.println("getResultList = " + cal.getResultList().toString()); // getResult = 0
+                for (int i = 0; i < cal.getResultList().size(); i++) {
+                    System.out.println(i + "번째 : " + cal.getResultList().get(i));
+                }
 
                 System.out.println("exit 입력 시 종료됩니다. 계속 하려면 아무거나 입력하세요.");
                 if (sc.next().equals("exit")) {

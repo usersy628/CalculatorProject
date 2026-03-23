@@ -1,6 +1,5 @@
 package com.example.calculator;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Calculator {
@@ -14,7 +13,7 @@ public class Calculator {
     private int num1;
     private int num2;
     private char symbol;
-    private int result;
+    private int result = 0;
     private ArrayList<Integer> resultList = new ArrayList<>();
 
     // 생성자
@@ -22,7 +21,6 @@ public class Calculator {
         this.num1 = num1;
         this.num2 = num2;
         this.symbol = symbol;
-        this.result = 0;
     }
 
     // 기능
@@ -44,36 +42,36 @@ public class Calculator {
     }
 
     // 세터
-    public int setNum1(int num1) {
+    public void setNum1(int num1) {
         this.num1 = num1;
-        return num1;
     }
-    public int num2(int num2) {
+    public void setNum2(int num2) {
         this.num2 = num2;
-        return num2;
     }
-    public char symbol(char symbol) {
+    public void setSymbol(char symbol) {
         this.symbol = symbol;
-        return symbol;
+    }
+    public void setResult(int result) {
+        this.result = result;
     }
 
     // 계산결과 저장
-    public void addResult() {
-        resultList.add(getResult());
+    public void addResultList(int result) {
+        resultList.add(result);
     }
 
     // 사칙연산 수행 - 반환
-    public static int calculator(int num1, char symbol, int num2) {
-        int result = 0;
-
-        // 사칙연산 케이스 지정 ( addition / subtraction / multiply / division )
+    public int calculator(int num1, char symbol, int num2) {
         switch (symbol) {
             case '+': result = num1 + num2; break;
             case '-': result = num1 - num2; break;
             case '*': result = num1 * num2; break;
-            case '/': result = num1 / num2; break;
+            case '/':
+                if (num2 == 0) {
+                    System.out.println("※0으로 나눌 수 없습니다");
+                }
+                result = num1 / num2; break;
         }
-
         return result;
     }
 }
