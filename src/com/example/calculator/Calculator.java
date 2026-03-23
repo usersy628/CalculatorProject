@@ -1,6 +1,7 @@
 package com.example.calculator;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Calculator {
     /*
@@ -15,6 +16,9 @@ public class Calculator {
     private char symbol;
     private int result = 0;
     private ArrayList<Integer> resultList = new ArrayList<>();
+
+    Scanner sc = new Scanner(System.in);
+
 
     // 생성자
     public Calculator(int num1, int num2, char symbol) {
@@ -55,9 +59,26 @@ public class Calculator {
         this.result = result;
     }
 
+    // 메뉴 선택
+    public void getMenu(int menu) {
+        System.out.println("메뉴 선택 \n [1] 계산하기 \n [2] 데이터 삭제 \n [3] 결과 모아보기 \n [4] 프로그램 종료");
+        sc.nextInt();
+        switch(menu) {
+            case 1:; // 계산기
+            case 2: removeResult();
+            case 3:;
+            case 4:;
+        }
+    }
+
     // 계산결과 저장
     public void addResultList(int result) {
         resultList.add(result);
+    }
+
+    // 가장 먼저 저장된 데이터 삭제
+    public void removeResult() {
+        resultList.remove(0);
     }
 
     // 사칙연산 수행 - 반환
@@ -68,7 +89,7 @@ public class Calculator {
             case '*': result = num1 * num2; break;
             case '/':
                 if (num2 == 0) {
-                    System.out.println("※0으로 나눌 수 없습니다");
+                    System.out.println("※ <잘못된 입력> 0으로 나눌 수 없습니다 ※ : ");
                 }
                 result = num1 / num2; break;
         }

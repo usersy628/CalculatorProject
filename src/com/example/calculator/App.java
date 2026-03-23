@@ -20,6 +20,7 @@ public class App {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
+//            cal.getMenu(int menu);
             try {
                 System.out.print("첫 번째 숫자를 입력하세요: ");
                 int num1 = sc.nextInt();
@@ -29,32 +30,41 @@ public class App {
 
                 // 연산 오류 방지: 기호 입력 받을 때 까지
                 while (!(symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/')) {
-                    System.out.print("※기호를 다시 입력하세요: ");
+                    System.out.print("※ <잘못된 입력> 기호를 다시 입력하세요 ※ : ");
                     symbol = sc.next().charAt(0);
                 }
 
                 System.out.print("두 번째 숫자를 입력하세요: ");
                 int num2 = sc.nextInt();
 
-
                 int result = cal.calculator(num1, symbol, num2);
                 System.out.println("결과: " + result); // 결과 반환
                 cal.addResultList(result);
-                System.out.println("getResultList = " + cal.getResultList().toString()); // getResult = 0
-                for (int i = 0; i < cal.getResultList().size(); i++) {
-                    System.out.println(i + "번째 : " + cal.getResultList().get(i));
+
+                System.out.println("가장 먼저 저장된 데이터 삭제? yes:1 | else:아무거나 ");
+                if (sc.nextInt() == 1) {
+                    cal.removeResult();
                 }
 
+                System.out.println("결과 값 모아보기 : yes:1 | else:아무거나");
+                if (sc.nextInt() == 1) {
+                    cal.getResultList();
+                    for (int i = 0; i < cal.getResultList().size(); i++) {
+                        System.out.println(i + "번째 : " + cal.getResultList().get(i));
+                    }
+                }
+
+                // 프로그램 종료
                 System.out.println("exit 입력 시 종료됩니다. 계속 하려면 아무거나 입력하세요.");
                 if (sc.next().equals("exit")) {
                     System.out.println("프로그램 종료");
                     break;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("※InputMismatchException" + e.getMessage());
+                System.out.println("※ InputMismatchException ※ :" + e.getMessage());
                 sc.nextLine();
             } catch (Exception e) {
-                System.out.println("※Exception" + e.getMessage());
+                System.out.println("※ Exception ※ : " + e.getMessage());
             }
         }
     }
