@@ -1,7 +1,9 @@
 package com.example.calculator;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Calculator {
     /*
@@ -11,28 +13,29 @@ public class Calculator {
     */
 
     // 속성
-    private int num1;
-    private int num2;
+    private double num1;
+    private double num2;
     private char symbol;
-    private int result = 0;
+    private double result = 0;
     private ArrayList<Double> resultList = new ArrayList<>();
 
     Scanner sc = new Scanner(System.in);
 
 
     // 생성자
-    public Calculator(int num1, int num2, char symbol) {
+    public Calculator(double num1, double num2, char symbol, double result) {
         this.num1 = num1;
         this.num2 = num2;
         this.symbol = symbol;
+        this.result = result;
     }
 
     // 기능
     // 게터
-    public int getNum1() {
+    public double getNum1() {
         return num1;
     }
-    public int getNum2() {
+    public double getNum2() {
         return num2;
     }
     public char getSymbol() {
@@ -46,16 +49,16 @@ public class Calculator {
     }
 
     // 세터
-    public void setNum1(int num1) {
+    public void setNum1(double num1) {
         this.num1 = num1;
     }
-    public void setNum2(int num2) {
+    public void setNum2(double num2) {
         this.num2 = num2;
     }
     public void setSymbol(char symbol) {
         this.symbol = symbol;
     }
-    public void setResult(int result) {
+    public void setResult(double result) {
         this.result = result;
     }
 
@@ -81,20 +84,16 @@ public class Calculator {
         resultList.remove(0);
     }
 
-    // 사칙연산 수행 - 반환
-    public int calculator(int num1, char symbol, int num2) {
-        switch (symbol) {
-            case '+': result = num1 + num2; break;
-            case '-': result = num1 - num2; break;
-            case '*': result = num1 * num2; break;
-            case '/':
-                if (num2 == 0) {
-                    System.out.println("※ <잘못된 입력> 0으로 나눌 수 없습니다 ※ : ");
-                }
-                result = num1 / num2; break;
-        }
-        return result;
-    }
+//    // 입력값보다 큰 결과만 조회
+//    public void printGreaterThan(double target) {
+//        resultList.stream()
+//                .filter(result -> result > target)
+//                .forEach(result -> System.out.println("조건 만족 결과: " + result));
+//    }
 
-    // Enum 적용해보기
+    public List<Double> findGreaterThan(double target) {
+        return resultList.stream()
+                .filter(result -> result >= target)
+                .toList();
+    }
 }

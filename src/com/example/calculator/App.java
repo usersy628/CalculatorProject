@@ -1,6 +1,7 @@
 package com.example.calculator;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -15,7 +16,7 @@ public class App {
         */
 
         System.out.println("Hello, Calculator!");
-        Calculator cal = new Calculator(0, 0, '+');
+        Calculator cal = new Calculator(0, 0, '+', 0);
         ArithmeticCalculator<Number> calc = new ArithmeticCalculator<>();
         Scanner sc = new Scanner(System.in);
 
@@ -26,13 +27,6 @@ public class App {
                 double num1 = sc.nextDouble();
                 System.out.print("사칙연산 기호를 입력하세요: ");
                 char symbol = sc.next().charAt(0);
-
-                // 연산 오류 방지: 기호 입력 받을 때 까지
-                while (!(symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/')) {
-                    System.out.print("※ <잘못된 입력> 기호를 다시 입력하세요 ※ : ");
-                    symbol = sc.next().charAt(0);
-                }
-
                 System.out.print("두 번째 숫자를 입력하세요: ");
                 double num2 = sc.nextDouble();
 
@@ -53,8 +47,20 @@ public class App {
                         System.out.println(i + "번째 : " + cal.getResultList().get(i));
                     }
                 }
+//                if (sc.nextInt() == 2) {
+//                    System.out.print("기준 값을 입력하세요: ");
+//                    double input = sc.nextDouble();
+//                    cal.printGreaterThan(input);
+//                }
+                if (sc.nextInt() == 2) {
+                    System.out.print("기준 값을 입력하세요: ");
+                    double input = sc.nextDouble();
+                    List<Double> results = cal.findGreaterThan(input);
+                    results.forEach(System.out::println);
+                }
 
-                // 프로그램 종료
+
+                    // 프로그램 종료
                 System.out.println("exit 입력 시 종료됩니다. 계속 하려면 아무거나 입력하세요.");
                 if (sc.next().equals("exit")) {
                     System.out.println("프로그램 종료");
