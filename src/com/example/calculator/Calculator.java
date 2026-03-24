@@ -15,7 +15,7 @@ public class Calculator {
     private int num2;
     private char symbol;
     private int result = 0;
-    private ArrayList<Integer> resultList = new ArrayList<>();
+    private ArrayList<Double> resultList = new ArrayList<>();
 
     Scanner sc = new Scanner(System.in);
 
@@ -38,10 +38,10 @@ public class Calculator {
     public char getSymbol() {
         return symbol;
     }
-    public int getResult() {
+    public double getResult() {
         return result;
     }
-    public ArrayList<Integer> getResultList() {
+    public ArrayList<Double> getResultList() {
         return resultList;
     }
 
@@ -72,7 +72,7 @@ public class Calculator {
     }
 
     // 계산결과 저장
-    public void addResultList(int result) {
+    public void addResultList(double result) {
         resultList.add(result);
     }
 

@@ -23,7 +23,7 @@ public class App {
 //            cal.getMenu(int menu);
             try {
                 System.out.print("첫 번째 숫자를 입력하세요: ");
-                int num1 = sc.nextInt();
+                double num1 = sc.nextInt();
                 System.out.print("사칙연산 기호를 입력하세요: ");
                 char symbol = sc.next().charAt(0);
 
@@ -34,10 +34,10 @@ public class App {
                 }
 
                 System.out.print("두 번째 숫자를 입력하세요: ");
-                int num2 = sc.nextInt();
+                double num2 = sc.nextInt();
 
 //                int result = cal.calculator(num1, symbol, num2);
-                int result = calc.calculate(num1, Operator.from(symbol), num2);
+                double result = calc.calculate(num1, Operator.from(symbol), num2);
                 System.out.println("결과: " + result); // 결과 반환
                 cal.addResultList(result);
 
