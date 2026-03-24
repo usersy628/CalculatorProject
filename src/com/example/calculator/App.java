@@ -16,7 +16,7 @@ public class App {
 
         System.out.println("Hello, Calculator!");
         Calculator cal = new Calculator(0, 0, '+');
-        ArithmeticCalculator calc = new ArithmeticCalculator();
+        ArithmeticCalculator<Number> calc = new ArithmeticCalculator<>();
         Scanner sc = new Scanner(System.in);
 
         while (true) {
