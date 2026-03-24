@@ -66,8 +66,8 @@ public class Calculator {
         switch(menu) {
             case 1:; // 계산기
             case 2: removeResult();
-            case 3:;
-            case 4:;
+            case 3: getResultList();
+            case 4: break;
         }
     }
 
@@ -95,4 +95,6 @@ public class Calculator {
         }
         return result;
     }
+
+    // Enum 적용해보기
 }
