@@ -18,6 +18,7 @@ public class Calculator {
     private char symbol;
     private double result = 0;
     private ArrayList<Double> resultList = new ArrayList<>();
+    private List<String> calculationList = new ArrayList<>();
 
     Scanner sc = new Scanner(System.in);
 
@@ -47,6 +48,9 @@ public class Calculator {
     public ArrayList<Double> getResultList() {
         return resultList;
     }
+    public List<String> getCalculationList() {
+        return calculationList;
+    }
 
     // 세터
     public void setNum1(double num1) {
@@ -62,15 +66,66 @@ public class Calculator {
         this.result = result;
     }
 
+    public boolean isCancle(int input) {
+        if (input == 0) {
+            System.out.println("메뉴로 돌아갑니다");
+            return true;
+        }
+        return false;
+    }
+
     // 메뉴 선택
-    public void getMenu(int menu) {
-        System.out.println("메뉴 선택 \n [1] 계산하기 \n [2] 데이터 삭제 \n [3] 결과 모아보기 \n [4] 프로그램 종료");
-        sc.nextInt();
-        switch(menu) {
-            case 1:; // 계산기
-            case 2: removeResult();
-            case 3: getResultList();
-            case 4: break;
+    public boolean getMenu() {
+        while (true) {
+            System.out.println("메뉴 선택 \n [1] 계산하기 \n [2] 데이터 삭제 \n [3] 결과 모아보기 \n [4] 입력값보다 큰 값 조회 \n [5] 프로그램 종료");
+            String menu = sc.next();
+
+            switch (menu) {
+                case "1": break;// 계산기
+                case "2":
+                    System.out.println("가장 먼저 저장된 데이터 삭제? yes: 1 | 메뉴로 돌아가기: 0 ");
+                    if (sc.nextInt() == 1) {
+                        try {
+                            removeResult();
+                            return false;
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println("저장된 데이터가 없습니다");
+                            return false;
+                        }
+                    }
+                    break;
+                case "3":
+                    System.out.println("결과 값 모아보기 : yes: 1 | 메뉴로 돌아가기: 0");
+                    if (sc.nextInt() == 1) {
+                        if (resultList.isEmpty()) {
+                            System.out.println("저장된 결과가 없습니다.");
+                            break;
+                        }
+                        for (int i = 0; i < getResultList().size(); i++) {
+                            System.out.println(i + 1 + "번째 : " + getResultList().get(i));
+                        }
+                    }
+                    return false;
+                case "4":
+                    System.out.println("입력값보다 큰 결과만 조회하기 : yes: 1 | 메뉴로 돌아가기: 0");
+                    if (sc.nextInt() == 1) {
+                        System.out.print("기준 값을 입력하세요: ");
+                        double input = sc.nextDouble();
+                        findGreaterThan(input).forEach(System.out::println);
+                    }
+                    return false;
+                case "5": // ...? 머리쥐난다
+                    System.out.println("exit 입력 시 종료됩니다. 메뉴로 돌아가기: 0");
+                    if (sc.next().equals("exit")) {
+                        System.out.println("프로그램 종료");
+                        return true;
+                    }
+                    return false;
+                default:
+                    System.out.println("잘못된 입력입니다.");
+                    return false;
+            }
+            return false;
         }
     }
 
@@ -79,18 +134,19 @@ public class Calculator {
         resultList.add(result);
     }
 
+    // 계산 기록 저장
+    public void addCalculation(double num1, char symbol, double num2, double result) {
+        calculationList.add(num1 + " " + symbol + " " + num2 + " = " + result);
+    }
+
     // 가장 먼저 저장된 데이터 삭제
     public void removeResult() {
         resultList.remove(0);
+        calculationList.remove(0);
+        System.out.println("삭제 되었습니다.");
     }
 
-//    // 입력값보다 큰 결과만 조회
-//    public void printGreaterThan(double target) {
-//        resultList.stream()
-//                .filter(result -> result > target)
-//                .forEach(result -> System.out.println("조건 만족 결과: " + result));
-//    }
-
+    // 입력값보다 큰 결과만 조회
     public List<Double> findGreaterThan(double target) {
         return resultList.stream()
                 .filter(result -> result >= target)

@@ -1,7 +1,6 @@
 package com.example.calculator;
 
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -21,7 +20,10 @@ public class App {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-//            cal.getMenu(int menu);
+            boolean isExit = cal.getMenu();
+            if (isExit) {
+                break;
+            }
             try {
                 System.out.print("첫 번째 숫자를 입력하세요: ");
                 double num1 = sc.nextDouble();
@@ -30,42 +32,11 @@ public class App {
                 System.out.print("두 번째 숫자를 입력하세요: ");
                 double num2 = sc.nextDouble();
 
-//                int result = cal.calculator(num1, symbol, num2);
                 double result = calc.calculate(num1, Operator.from(symbol), num2);
                 System.out.println("결과: " + result); // 결과 반환
-                cal.addResultList(result);
 
-                System.out.println("가장 먼저 저장된 데이터 삭제? yes:1 | else:아무거나 ");
-                if (sc.nextInt() == 1) {
-                    cal.removeResult();
-                }
-
-                System.out.println("결과 값 모아보기 : yes:1 | else:아무거나");
-                if (sc.nextInt() == 1) {
-                    cal.getResultList();
-                    for (int i = 0; i < cal.getResultList().size(); i++) {
-                        System.out.println(i + "번째 : " + cal.getResultList().get(i));
-                    }
-                }
-//                if (sc.nextInt() == 2) {
-//                    System.out.print("기준 값을 입력하세요: ");
-//                    double input = sc.nextDouble();
-//                    cal.printGreaterThan(input);
-//                }
-                if (sc.nextInt() == 2) {
-                    System.out.print("기준 값을 입력하세요: ");
-                    double input = sc.nextDouble();
-                    List<Double> results = cal.findGreaterThan(input);
-                    results.forEach(System.out::println);
-                }
-
-
-                    // 프로그램 종료
-                System.out.println("exit 입력 시 종료됩니다. 계속 하려면 아무거나 입력하세요.");
-                if (sc.next().equals("exit")) {
-                    System.out.println("프로그램 종료");
-                    break;
-                }
+                cal.addResultList(result); // 결과 저장
+                cal.addCalculation(num1, symbol, num2, result); // 계산 기록 저장
             } catch (InputMismatchException e) {
                 System.out.println("※ InputMismatchException ※ :" + e.getMessage());
                 sc.nextLine();
