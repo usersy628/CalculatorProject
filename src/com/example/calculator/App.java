@@ -20,29 +20,75 @@ public class App {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            boolean isExit = cal.getMenu(); // 메뉴를 app으로 빼고싶은데 쓸 힘이 없다....
-            if (isExit) {
-                break;
-            }
-            try {
-                System.out.print("첫 번째 숫자를 입력하세요: ");
-                double num1 = sc.nextDouble();
-                System.out.print("사칙연산 기호를 입력하세요: ");
-                char symbol = sc.next().charAt(0);
-                System.out.print("두 번째 숫자를 입력하세요: ");
-                double num2 = sc.nextDouble();
+            System.out.println("메뉴 선택 - [1] 계산하기 [2] 데이터 삭제 [3] 결과 모아보기 [4] 입력값보다 큰 값 조회 [5] 프로그램 종료");
+            String menu = sc.next();
+            switch (menu) {
+                case "1":
+                    try {
+                        System.out.print("첫 번째 숫자를 입력하세요: ");
+                        double num1 = sc.nextDouble();
+                        System.out.print("사칙연산 기호를 입력하세요: ");
+                        char symbol = sc.next().charAt(0);
+                        System.out.print("두 번째 숫자를 입력하세요: ");
+                        double num2 = sc.nextDouble();
 
-                double result = calc.calculate(num1, Operator.from(symbol), num2);
-                System.out.println("결과: " + result); // 결과 반환
+                        double result = calc.calculate(num1, Operator.from(symbol), num2);
+                        System.out.println("결과: " + result); // 결과 반환
 
-                cal.addResultList(result); // 결과 저장
-                cal.addCalculation(num1, symbol, num2, result); // 계산 기록 저장
-            } catch (InputMismatchException e) {
-                System.out.println("※ InputMismatchException ※ :" + e.getMessage());
-                sc.nextLine(); // 루프 방지
-            } catch (Exception e) {
-                System.out.println("※ Exception ※ : " + e.getMessage());
+                        cal.addResultList(result); // 결과 저장
+                    } catch (InputMismatchException e) {
+                        System.out.println("※ InputMismatchException ※ :" + e.getMessage());
+                        sc.nextLine(); // 루프 방지
+                    } catch (Exception e) {
+                        System.out.println("※ Exception ※ : " + e.getMessage());
+                    }
+                    break;
+                case "2":
+                    System.out.println("가장 먼저 저장된 데이터 삭제? yes: 1 | 메뉴로 돌아가기: 아무거나 입력 ");
+                    if (sc.nextInt() == 1) {
+                        try {
+                            cal.removeResult();
+                            break;
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println("저장된 데이터가 없습니다");
+                            break;
+                        }
+                    }
+                    break;
+                case "3":
+                    System.out.println("결과 값 모아보기 : yes: 1 | 메뉴로 돌아가기: 아무거나 입력");
+                    if (sc.nextInt() == 1) {
+                        if (cal.getResultList().isEmpty()) {
+                            System.out.println("저장된 결과가 없습니다.");
+                            break;
+                        }
+                        for (int i = 0; i < cal.getResultList().size(); i++) {
+                            System.out.println(i + 1 + "번째 : " + cal.getResultList().get(i));
+                        }
+                    }
+                    break;
+                case "4":
+                    System.out.println("입력값보다 큰 결과만 조회하기 : yes: 1 | 메뉴로 돌아가기: 아무거나 입력");
+                    if (sc.nextInt() == 1) {
+                        System.out.print("기준 값을 입력하세요: ");
+                        double input = sc.nextDouble();
+                        cal.findGreaterThan(input).forEach(System.out::println);
+                    }
+                    break;
+                case "5":
+                    System.out.println("exit 입력 시 종료됩니다. 메뉴로 돌아가기: 아무거나 입력");
+                    if (sc.next().equals("exit")) {
+                        System.out.println("프로그램 종료");
+                        return;
+                    }
+                    break;
+                default:
+                    System.out.println("잘못된 입력입니다.");
             }
         }
     }
 }
+                    
+
+                
+            
