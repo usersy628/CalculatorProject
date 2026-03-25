@@ -20,7 +20,7 @@ public class App {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            boolean isExit = cal.getMenu();
+            boolean isExit = cal.getMenu(); // 메뉴를 app으로 빼고싶은데 쓸 힘이 없다....
             if (isExit) {
                 break;
             }
@@ -39,7 +39,7 @@ public class App {
                 cal.addCalculation(num1, symbol, num2, result); // 계산 기록 저장
             } catch (InputMismatchException e) {
                 System.out.println("※ InputMismatchException ※ :" + e.getMessage());
-                sc.nextLine();
+                sc.nextLine(); // 루프 방지
             } catch (Exception e) {
                 System.out.println("※ Exception ※ : " + e.getMessage());
             }

@@ -8,6 +8,8 @@ public class ArithmeticCalculator<T extends Number> {
     2. 제네릭 활용 - 실수, 즉 double 타입의 값을 전달 받아도 연산이 수행하도록 만들기
     3. 저장된 연산 결과들 중 Scanner로 입력받은 값보다 큰 결과값 들을 출력
     */
+
+    // Number를 받아서 double로 바꾸고 Operator에 계산 맡김
     public double calculate (T a, Operator op, T b) {
         double num1 = a.doubleValue();
         double num2 = b.doubleValue();

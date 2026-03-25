@@ -22,7 +22,6 @@ public class Calculator {
 
     Scanner sc = new Scanner(System.in);
 
-
     // 생성자
     public Calculator(double num1, double num2, char symbol, double result) {
         this.num1 = num1;
@@ -50,20 +49,6 @@ public class Calculator {
     }
     public List<String> getCalculationList() {
         return calculationList;
-    }
-
-    // 세터
-    public void setNum1(double num1) {
-        this.num1 = num1;
-    }
-    public void setNum2(double num2) {
-        this.num2 = num2;
-    }
-    public void setSymbol(char symbol) {
-        this.symbol = symbol;
-    }
-    public void setResult(double result) {
-        this.result = result;
     }
 
     public boolean isCancle(int input) {
