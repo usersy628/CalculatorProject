@@ -1,4 +1,4 @@
-package com.example.calculator;
+package com.example.calculator.domain;
 
 public enum Operator { // “미리 정해진 버튼만 있는 리모컨”
     ADD('+') { // 연산을 객체로 만들기: 문자 -> 안전한 타입으로 변환

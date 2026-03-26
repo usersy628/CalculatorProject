@@ -1,5 +1,9 @@
 package com.example.calculator;
 
+import com.example.calculator.domain.ArithmeticCalculator;
+import com.example.calculator.domain.Calculator;
+import com.example.calculator.domain.Operator;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
